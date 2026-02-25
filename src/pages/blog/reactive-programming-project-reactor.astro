@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen bg-slate-900 text-slate-100 antialiased">
+    <div class="max-w-3xl mx-auto px-6 py-20">
+      <article>
+        <header class="mb-12 border-b border-slate-700/40 pb-8">
+          <a href="/" class="text-blue-400 hover:text-blue-300 mb-6 inline-block">← Back home</a>
+          <h1 class="text-5xl font-bold mb-4">Reactive Programming Patterns with Project Reactor</h1>
+          <div class="flex gap-4 text-slate-400">
+            <span>October 2024</span>
+            <span>•</span>
+            <span>14 min read</span>
+          </div>
+        </header>
+
+        <div class="prose prose-invert max-w-none space-y-6">
+          <p class="text-lg text-slate-300">
+            Traditional Java applications use blocking I/O. When a thread makes a network request, it waits for the
+            response, unable to do anything else. With reactive programming, a single thread can handle thousands of
+            concurrent operations. Let's explore Project Reactor and how to build responsive, high-throughput applications.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8">The Problem with Blocking I/O</h2>
+          <p class="text-slate-300">
+            Each HTTP request gets its own thread. The thread is allocated from a thread pool, handles the request,
+            and returns to the pool. For N concurrent requests, you need N threads. Threads are expensive—
+            each takes ~1MB of memory. So you're limited to ~1000 concurrent connections per server.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8">Reactive Streams: The Foundation</h2>
+          <p class="text-slate-300">
+            Reactive Streams is a standard for asynchronous stream processing with backpressure.
+            Three key concepts:
+          </p>
+          <ul class="space-y-3 text-slate-300">
+            <li><strong>Publisher</strong> - Produces data (e.g., API response, database query results)</li>
+            <li><strong>Subscriber</strong> - Consumes data and handles elements, errors, or completion</li>
+            <li><strong>Backpressure</strong> - Subscriber tells publisher "I can only handle 10 items at a time"</li>
+          </ul>
+
+          <h2 class="text-3xl font-bold mt-8">Project Reactor Basics</h2>
+          <p class="text-slate-300">
+            Project Reactor is Spring's implementation of Reactive Streams. Two key types:
+          </p>
+
+          <h3 class="text-2xl font-semibold mt-6">Mono&lt;T&gt;</h3>
+          <p class="text-slate-300">
+            A sequence that emits 0 or 1 element. Similar to Optional or a Future that completes with a single value.
+          </p>
+
+          <h3 class="text-2xl font-semibold mt-6">Flux&lt;T&gt;</h3>
+          <p class="text-slate-300">
+            A sequence that emits 0 to N elements. Think of it as a stream of items that can be processed,
+            filtered, transformed, etc.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Common Operators</h2>
+          <ul class="space-y-3 text-slate-300">
+            <li><strong>map()</strong> - Transform each element</li>
+            <li><strong>filter()</strong> - Keep only elements matching a predicate</li>
+            <li><strong>flatMap()</strong> - Transform each element into a stream, flatten results</li>
+            <li><strong>merge()</strong> - Combine multiple publishers</li>
+            <li><strong>zipWith()</strong> - Combine elements from multiple publishers</li>
+            <li><strong>retry()</strong> - Retry on error</li>
+            <li><strong>timeout()</strong> - Emit error if no element within duration</li>
+            <li><strong>buffer()</strong> - Collect elements into batches</li>
+          </ul>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Spring WebFlux Integration</h2>
+          <p class="text-slate-300">
+            Spring WebFlux is the reactive web framework for Spring. It runs on non-blocking servers
+            (like Netty) and handles thousands of concurrent requests with a handful of threads.
+          </p>
+          <p class="text-slate-300">
+            Your handlers return Mono or Flux instead of blocking responses. Spring handles all the async plumbing.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Handling Backpressure</h2>
+          <p class="text-slate-300">
+            Backpressure ensures your subscriber doesn't get overwhelmed. When processing a large data stream,
+            tell the publisher "send me items one at a time" or "send me 100 items". The publisher respects this,
+            preventing memory exhaustion.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Key Takeaways</h2>
+          <ul class="space-y-3 text-slate-300">
+            <li>• Reactive programming handles high concurrency with few threads</li>
+            <li>• Mono for single values, Flux for streams</li>
+            <li>• Operators compose transformations, filters, and error handling</li>
+            <li>• Backpressure prevents overload and ensures stability</li>
+            <li>• Spring WebFlux builds high-performance web applications</li>
+            <li>• Reactive isn't always better—use where concurrency matters</li>
+          </ul>
+
+          <div class="mt-12 p-6 bg-slate-800/50 border border-slate-700/40 rounded-lg">
+            <p class="text-slate-300">
+              Building high-concurrency applications? <a href="mailto:LLSEREMAK@gmail.com" class="text-blue-400 hover:text-blue-300">Let's discuss reactive architecture</a>.
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
+

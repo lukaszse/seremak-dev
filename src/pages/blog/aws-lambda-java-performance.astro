@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen bg-slate-900 text-slate-100 antialiased">
+    <div class="max-w-3xl mx-auto px-6 py-20">
+      <article>
+        <header class="mb-12 border-b border-slate-700/40 pb-8">
+          <a href="/" class="text-blue-400 hover:text-blue-300 mb-6 inline-block">← Back home</a>
+          <h1 class="text-5xl font-bold mb-4">Optimizing Java for AWS Lambda</h1>
+          <div class="flex gap-4 text-slate-400">
+            <span>November 2024</span>
+            <span>•</span>
+            <span>12 min read</span>
+          </div>
+        </header>
+
+        <div class="prose prose-invert max-w-none space-y-6">
+          <p class="text-lg text-slate-300">
+            AWS Lambda promises to run your code without managing servers. But when you use Java on Lambda, you face
+            a challenge: cold starts. The JVM startup time can add seconds to your first invocation. Let's explore
+            how to optimize Java for serverless.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">The Cold Start Problem</h2>
+          <p class="text-slate-300">
+            When Lambda invokes your function for the first time (or after a period of inactivity), it needs to:
+          </p>
+          <ul class="space-y-2 text-slate-300">
+            <li>• Download and unpack the container image</li>
+            <li>• Start the JVM</li>
+            <li>• Load classes and initialize your application</li>
+            <li>• Finally execute your code</li>
+          </ul>
+          <p class="text-slate-300 mt-4">
+            This can take 5-15 seconds for traditional Java applications. That's expensive and users hate latency.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Solution 1: GraalVM Native Images</h2>
+          <p class="text-slate-300">
+            GraalVM native image compilation converts Java bytecode to native machine code ahead of time.
+            No JVM needed at runtime. Cold starts drop from seconds to milliseconds.
+          </p>
+          <p class="text-slate-300">
+            The tradeoff: native images require careful configuration for reflection and dynamic features.
+            But for serverless, this is usually worth it.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Solution 2: Lightweight Frameworks</h2>
+          <p class="text-slate-300">
+            Traditional Spring Boot applications carry a lot of baggage. For Lambda, use lightweight frameworks:
+          </p>
+          <ul class="space-y-2 text-slate-300">
+            <li>• <strong>Micronaut</strong> - Built for microservices and serverless from the ground up</li>
+            <li>• <strong>Quarkus</strong> - Container-first with excellent Lambda support</li>
+            <li>• <strong>Plain Java</strong> - Sometimes the fastest is no framework at all</li>
+          </ul>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Solution 3: Strategic Initialization</h2>
+          <p class="text-slate-300">
+            Lazy loading is your friend. Don't initialize expensive resources in static blocks or constructors.
+            Initialize them on first use within the handler function. The container stays warm, so subsequent
+            invocations will already have resources loaded.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Solution 4: Memory Optimization</h2>
+          <p class="text-slate-300">
+            Lambda pricing is based on memory * duration. Allocate more memory to your function—it gives you
+            more CPU power, and execution is faster. Often the optimal memory allocation is higher than you'd expect.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Practical Example</h2>
+          <p class="text-slate-300">
+            With Micronaut and GraalVM native image:
+          </p>
+          <ul class="space-y-2 text-slate-300">
+            <li>• Cold start: ~100ms</li>
+            <li>• Warm invocation: ~10ms</li>
+            <li>• Memory usage: ~50MB</li>
+            <li>• Much better pricing than traditional Java</li>
+          </ul>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Key Takeaways</h2>
+          <ul class="space-y-3 text-slate-300">
+            <li>• Use GraalVM native images to eliminate JVM startup overhead</li>
+            <li>• Consider lightweight frameworks like Micronaut for serverless</li>
+            <li>• Lazy-load expensive resources within handler functions</li>
+            <li>• Experiment with memory allocation—higher memory = more CPU = faster execution</li>
+            <li>• Monitor cold start metrics and optimize iteratively</li>
+          </ul>
+
+          <div class="mt-12 p-6 bg-slate-800/50 border border-slate-700/40 rounded-lg">
+            <p class="text-slate-300">
+              Building serverless applications with Java? <a href="mailto:LLSEREMAK@gmail.com" class="text-blue-400 hover:text-blue-300">Let's discuss your architecture</a>.
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
+

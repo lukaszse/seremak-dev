@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Seremak.dev</title>
+
+		<style>
+		  /* Animated gradient for text (used on the main heading) */
+		  .gradient-animate {
+		    /* use inline so browser kerning applies between glyphs */
+		    display: inline;
+		    background-size: 200% 200%;
+		    background-repeat: no-repeat;
+		    -webkit-background-clip: text;
+		    background-clip: text;
+		    /* ensure text becomes transparent in both WebKit and others */
+		    color: transparent;
+		    -webkit-text-fill-color: transparent;
+
+		    animation: gradientShift 6s ease infinite;
+		  }
+
+		  @keyframes gradientShift {
+		    0% { background-position: 0% 50%; }
+		    50% { background-position: 100% 50%; }
+		    100% { background-position: 0% 50%; }
+		  }
+		</style>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

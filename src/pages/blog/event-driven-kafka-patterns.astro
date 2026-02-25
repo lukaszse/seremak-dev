@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout>
+  <main class="min-h-screen bg-slate-900 text-slate-100 antialiased">
+    <div class="max-w-3xl mx-auto px-6 py-20">
+      <article>
+        <header class="mb-12 border-b border-slate-700/40 pb-8">
+          <a href="/" class="text-blue-400 hover:text-blue-300 mb-6 inline-block">← Back home</a>
+          <h1 class="text-5xl font-bold mb-4">Event-Driven Architecture with Kafka</h1>
+          <div class="flex gap-4 text-slate-400">
+            <span>December 2024</span>
+            <span>•</span>
+            <span>15 min read</span>
+          </div>
+        </header>
+
+        <div class="prose prose-invert max-w-none space-y-6">
+          <p class="text-lg text-slate-300">
+            Event-driven architecture has become the backbone of modern distributed systems. When you need to handle
+            millions of events, coordinate between microservices, and maintain data consistency across the system,
+            Apache Kafka emerges as the natural choice.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Why Event-Driven?</h2>
+          <p class="text-slate-300">
+            Traditional request-response architecture creates tight coupling between services. When service A needs to
+            communicate with service B, it must wait for a response. This creates bottlenecks and makes systems fragile.
+          </p>
+          <p class="text-slate-300">
+            Event-driven systems decouple services through events. Service A publishes events when something happens,
+            and service B subscribes to those events independently. This creates a more resilient, scalable system.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Core Patterns</h2>
+
+          <h3 class="text-2xl font-semibold mt-6 text-slate-100">1. Event Sourcing</h3>
+          <p class="text-slate-300">
+            Instead of storing only the current state of an entity, you store all events that led to that state.
+            Your database becomes an event log. This gives you complete audit trail and ability to rebuild state at any point in time.
+          </p>
+
+          <h3 class="text-2xl font-semibold mt-6 text-slate-100">2. SAGA Pattern</h3>
+          <p class="text-slate-300">
+            Distributed transactions are complex. The SAGA pattern breaks them into a series of local transactions,
+            coordinated through events. If one step fails, compensation transactions roll back the previous steps.
+          </p>
+
+          <h3 class="text-2xl font-semibold mt-6 text-slate-100">3. Outbox Pattern</h3>
+          <p class="text-slate-300">
+            Ensures reliability when publishing events. Events are written to a local outbox table within the same transaction
+            as your business logic. A separate process then publishes them to Kafka, ensuring no events are lost.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Implementing with Kafka</h2>
+          <p class="text-slate-300">
+            Kafka provides the infrastructure for event-driven systems. Its distributed nature, retention policies, and
+            consumer groups make it ideal for building scalable event architectures. Topics act as event streams, consumers
+            can process events independently, and partition keys ensure ordering where needed.
+          </p>
+
+          <h2 class="text-3xl font-bold mt-8 text-slate-100">Key Takeaways</h2>
+          <ul class="space-y-3 text-slate-300">
+            <li>• Event-driven architecture decouples services and improves system resilience</li>
+            <li>• Use event sourcing for complete audit trails and state reconstruction</li>
+            <li>• SAGA pattern handles distributed transactions</li>
+            <li>• Outbox pattern ensures reliable event publishing</li>
+            <li>• Kafka provides the infrastructure for reliable event streaming at scale</li>
+          </ul>
+
+          <div class="mt-12 p-6 bg-slate-800/50 border border-slate-700/40 rounded-lg">
+            <p class="text-slate-300">
+              Want to discuss event-driven architecture for your system? <a href="mailto:LLSEREMAK@gmail.com" class="text-blue-400 hover:text-blue-300">Get in touch</a>.
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
+
