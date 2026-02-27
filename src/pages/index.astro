@@ -176,23 +176,117 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Certifications -->
       <section class="mt-24 mb-24">
-        <h2 class="text-4xl font-bold mb-8">Certifications</h2>
-        <div class="grid gap-4 sm:grid-cols-3">
-          <div class="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4">
-            <div class="text-blue-400 font-semibold">AWS Certified Cloud Practitioner</div>
-          </div>
-          <div class="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4">
-            <div class="text-blue-400 font-semibold">AWS Certified Developer</div>
-          </div>
-          <div class="bg-blue-900/30 border border-blue-500/30 rounded-lg p-4">
-            <div class="text-blue-400 font-semibold">AWS Certified Solutions Architect</div>
-          </div>
-          <div class="bg-amber-900/30 border border-amber-500/30 rounded-lg p-4">
-            <div class="text-amber-400 font-semibold">PMP - Project Management Professional</div>
-          </div>
-          <div class="bg-amber-900/30 border border-amber-500/30 rounded-lg p-4">
-            <div class="text-amber-400 font-semibold">PRINCE2 Foundation</div>
-          </div>
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-4xl font-bold">Certifications & Badges</h2>
+          <a href="https://www.credly.com/users/lukasz-seremak/badges"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="text-sm text-blue-400 hover:text-blue-300 transition flex items-center gap-2">
+            View all on Credly →
+          </a>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- AWS SAA - Główny certyfikat -->
+          <a href="https://www.credly.com/badges/f994bbde-607a-4e94-b353-66ea2e671a8e"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-blue-900/30 border border-blue-500/50 rounded-lg p-6 relative overflow-hidden group hover:border-blue-400/70 transition-all hover:shadow-lg hover:shadow-blue-500/20">
+            <div class="flex items-start gap-4">
+              <img src="/badges/aws-saa.png"
+                   alt="AWS SAA Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain"/>
+              <div class="flex-1">
+                <div class="text-xs text-blue-300 uppercase tracking-wider mb-2">Amazon Web Services</div>
+                <div class="text-slate-100 font-bold text-base leading-tight">AWS Certified Solutions Architect – Associate</div>
+                <div class="text-xs text-slate-400 mt-2">Expires Sep 27, 2028</div>
+              </div>
+            </div>
+          </a>
+
+          <!-- PMP -->
+          <a href="https://www.credly.com/badges/2ce1a6e8-4ca8-481d-a1df-54842af47376"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-amber-900/20 border border-amber-500/40 rounded-lg p-6 relative overflow-hidden group hover:border-amber-400/60 transition-all hover:shadow-lg hover:shadow-amber-500/10">
+            <div class="flex items-start gap-4">
+              <img src="/badges/pmp.png"
+                   alt="PMP Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain"/>
+              <div class="flex-1">
+                <div class="text-xs text-amber-300 uppercase tracking-wider mb-2">Project Management Institute</div>
+                <div class="text-slate-100 font-bold text-base leading-tight">Project Management Professional (PMP)®</div>
+                <div class="text-xs text-slate-400 mt-2">Expires Sep 20, 2028</div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Kafka -->
+          <a href="https://www.credly.com/badges/b50f74ab-1b07-4e43-b723-e54437620150"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition-all">
+            <div class="flex items-start gap-4">
+              <img src="/badges/kafka_for_begners.png"
+                   alt="Kafka Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain bg-white p-1"/>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-2">O'Reilly</div>
+                <div class="text-slate-200 font-semibold text-base leading-tight">Apache Kafka for Beginners</div>
+                <div class="text-xs text-slate-400 mt-2">Issued Jan 1, 2026</div>
+              </div>
+            </div>
+          </a>
+
+          <!-- CCNA -->
+          <a href="https://www.credly.com/badges/be28b171-cbf9-4192-a0b5-70cdf68d733e"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition-all">
+            <div class="flex items-start gap-4">
+              <img src="/badges/ccna.png"
+                   alt="CCNA Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain"/>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-2">Cisco</div>
+                <div class="text-slate-200 font-semibold text-base leading-tight">CCNA: Introduction to Networks</div>
+                <div class="text-xs text-slate-400 mt-2">Issued Jan 21, 2022</div>
+              </div>
+            </div>
+          </a>
+
+          <!-- AWS Developer Course -->
+          <a href="https://www.credly.com/badges/7525065f-14cb-4b27-921c-9cdb75906ca1"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition-all">
+            <div class="flex items-start gap-4">
+              <img src="/badges/AWS_CertifiedDeveloper.png"
+                   alt="AWS Developer Course Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain bg-white p-1"/>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-2">O'Reilly</div>
+                <div class="text-slate-200 font-semibold text-base leading-tight">AWS Certified Developer Course</div>
+                <div class="text-xs text-slate-400 mt-2">Issued May 20, 2024</div>
+              </div>
+            </div>
+          </a>
+
+          <!-- AWS CCP Course -->
+          <a href="https://www.credly.com/badges/3922affc-4c3f-404a-afd3-530adddca6ee"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bg-slate-800/50 border border-slate-700 rounded-lg p-6 hover:border-slate-600 transition-all">
+            <div class="flex items-start gap-4">
+              <img src="/badges/AWS_CCP.png"
+                   alt="AWS CCP Course Badge"
+                   class="w-20 h-20 flex-shrink-0 rounded-lg object-contain bg-white p-1"/>
+              <div class="flex-1">
+                <div class="text-xs text-slate-400 uppercase tracking-wider mb-2">O'Reilly</div>
+                <div class="text-slate-200 font-semibold text-base leading-tight">AWS CCP Course</div>
+                <div class="text-xs text-slate-400 mt-2">Issued May 3, 2024</div>
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
