@@ -1,31 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
 ---
 
 <Layout>
-  <main class="min-h-screen bg-slate-900 text-slate-100 antialiased">
+  <Navigation />
+  <main id="top" class="min-h-screen bg-slate-900 text-slate-100 antialiased pt-20">
     <div class="max-w-5xl mx-auto px-6 py-10">
 
-      <!-- Header: tylko logo/napis -->
-      <header class="mb-16">
-        <h1 class="text-6xl sm:text-7xl font-extrabold tracking-tight drop-shadow-[0_4px_24px_rgba(2,6,23,0.9)]">
-          <svg viewBox="0 0 1200 160" width="100%" height="auto" role="img" aria-label="Seremak.dev" preserveAspectRatio="xMinYMid meet" style="display:block;">
-            <defs>
-              <linearGradient id="seremakGrad" x1="0%" x2="100%">
-                <stop offset="0%" stop-color="#60a5fa" />
-                <stop offset="50%" stop-color="#06b6d4" />
-                <stop offset="100%" stop-color="#8b5cf6" />
-              </linearGradient>
-            </defs>
-            <text x="0" y="115" fill="url(#seremakGrad)" style="font-family: inherit; font-weight: 800; font-size: 96px; letter-spacing: -0.02em;">
-              Seremak.dev
-            </text>
-          </svg>
-        </h1>
-      </header>
 
       <!-- Hero Section: tekst po lewej, zdjęcie po prawej -->
-      <section class="flex flex-col md:flex-row items-center gap-12 mb-24">
+      <section id="about" class="flex flex-col md:flex-row items-center gap-12 mb-24">
         <!-- Lewa kolumna: tekst -->
         <div class="flex-1 space-y-5 order-2 md:order-1">
           <div>
@@ -87,7 +72,7 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Services Section -->
-      <section class="mt-24 mb-24">
+      <section id="services" class="mt-24 mb-24">
         <h2 class="text-4xl font-bold mb-12">What I Do</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div class="group bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg border border-slate-700/40 p-8 hover:border-blue-500/40 transition">
@@ -129,7 +114,7 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Expertise Stack -->
-      <section class="mt-24 mb-24">
+      <section id="stack" class="mt-24 mb-24">
         <h2 class="text-4xl font-bold mb-12">Tech Stack</h2>
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div class="bg-slate-800/50 rounded-lg p-6 border border-slate-700/40">
@@ -175,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Certifications -->
-      <section class="mt-24 mb-24">
+      <section id="certifications" class="mt-24 mb-24">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-4xl font-bold">Certifications & Badges</h2>
           <a href="https://www.credly.com/users/lukasz-seremak/badges"
@@ -291,17 +276,17 @@ import Layout from '../layouts/Layout.astro';
       </section>
 
       <!-- Blog Section -->
-      <section class="mt-24 mb-24">
+      <section id="blog" class="mt-24 mb-24">
         <h2 class="text-4xl font-bold mb-12">Latest Articles</h2>
         <div class="space-y-6">
           <article class="group bg-slate-800/30 rounded-lg border border-slate-700/40 p-8 hover:border-blue-500/40 transition">
-            <a href="/blog/event-driven-kafka-patterns" class="block">
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7431959663690162176/" target="_blank" rel="noopener noreferrer" class="block">
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1">
-                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">Event-Driven Architecture with Kafka</h3>
-                  <p class="text-sm text-slate-400 mt-2">December 2024</p>
+                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">The AI Productivity Paradox: Why "Vibe Coding" is a Risk to Your Bottom Line</h3>
+                  <p class="text-sm text-slate-400 mt-2">February 24, 2026</p>
                   <p class="text-slate-300 mt-4">
-                    How to architect systems for real-time event processing. We explore SAGA pattern, Outbox pattern, event sourcing, and distributed transaction handling in event-driven systems.
+                    Most developers lose productivity after adopting AI. "Vibe Coding" without engineering accelerates technical debt faster than teams can clean it up. Learn why strong architecture is the key to turning AI from a risky experiment into a 10x competitive advantage—with architecture-as-context, AI-native documentation, and visual schemas.
                   </p>
                 </div>
                 <div class="text-3xl">→</div>
@@ -310,13 +295,13 @@ import Layout from '../layouts/Layout.astro';
           </article>
 
           <article class="group bg-slate-800/30 rounded-lg border border-slate-700/40 p-8 hover:border-blue-500/40 transition">
-            <a href="/blog/aws-lambda-java-performance" class="block">
+            <a href="https://www.linkedin.com/posts/activity-7371165132082728960-sqis" target="_blank" rel="noopener noreferrer" class="block">
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1">
-                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">Optimizing Java for AWS Lambda</h3>
-                  <p class="text-sm text-slate-400 mt-2">November 2024</p>
+                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">Ifology: A Programmer's Worst Habit</h3>
+                  <p class="text-sm text-slate-400 mt-2">September 15, 2025</p>
                   <p class="text-slate-300 mt-4">
-                    Building high-performance serverless applications. Cold start optimization, GraalVM native images, Micronaut for Lambda, and cost optimization strategies.
+                    Stop the endless festival of nested if-else statements. Learn how the Strategy design pattern transforms unmaintainable ifology into clean, testable, and future-proof code. Practical examples in Kotlin showing SOLID principles in action—add features without rewriting everything.
                   </p>
                 </div>
                 <div class="text-3xl">→</div>
@@ -325,24 +310,25 @@ import Layout from '../layouts/Layout.astro';
           </article>
 
           <article class="group bg-slate-800/30 rounded-lg border border-slate-700/40 p-8 hover:border-blue-500/40 transition">
-            <a href="/blog/reactive-programming-project-reactor" class="block">
+            <a href="https://dev.to/llseremak/serverless-functions-in-java-does-it-even-make-sense-2k7h" target="_blank" rel="noopener noreferrer" class="block">
               <div class="flex items-start justify-between gap-4">
                 <div class="flex-1">
-                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">Reactive Programming Patterns with Project Reactor</h3>
-                  <p class="text-sm text-slate-400 mt-2">October 2024</p>
+                  <h3 class="text-2xl font-semibold group-hover:text-blue-400 transition">Serverless Functions in Java – Does It Even Make Sense?</h3>
+                  <p class="text-sm text-slate-400 mt-2">June 9, 2025</p>
                   <p class="text-slate-300 mt-4">
-                    Mastering non-blocking I/O and backpressure. Building responsive applications with Spring WebFlux and Project Reactor for handling millions of concurrent requests.
+                    Can Java work efficiently in a serverless world? Exploring cold start challenges, automatic scaling benefits, and building an event-driven serverless discount calculator with AWS Lambda, API Gateway, and SQS. Learn when Java serverless makes sense and how to optimize performance.
                   </p>
                 </div>
                 <div class="text-3xl">→</div>
               </div>
             </a>
           </article>
+
         </div>
       </section>
 
       <!-- CTA Section -->
-      <section class="mt-24 mb-24 bg-gradient-to-r from-blue-900/30 to-slate-900/30 rounded-lg border border-blue-500/20 p-12">
+      <section id="contact" class="mt-24 mb-24 bg-gradient-to-r from-blue-900/30 to-slate-900/30 rounded-lg border border-blue-500/20 p-12">
         <h2 class="text-3xl font-bold mb-4">Ready to Build Something Scalable?</h2>
         <p class="text-slate-300 mb-8">Let's discuss your architecture challenges and build a solution that grows with your business.</p>
         <div class="flex flex-wrap gap-4">
