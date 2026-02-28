@@ -374,6 +374,16 @@ import Navigation from '../components/Navigation.astro';
         <p class="text-slate-400 text-sm mb-6">Fill out the form and I'll get back to you as soon as possible.</p>
 
         <form id="contactForm" class="space-y-4">
+          <!-- Honeypot field - ukryte pole do łapania botów -->
+          <input
+            type="text"
+            name="_gotcha"
+            aria-label="Please leave this field blank"
+            style="display:none"
+            tabindex="-1"
+            autocomplete="off"
+          />
+
           <div>
             <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name</label>
             <input
@@ -381,6 +391,8 @@ import Navigation from '../components/Navigation.astro';
               id="name"
               name="name"
               required
+              minlength="2"
+              maxlength="100"
               class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-blue-500 transition"
               placeholder="Your name"
             />
@@ -393,6 +405,7 @@ import Navigation from '../components/Navigation.astro';
               id="email"
               name="email"
               required
+              maxlength="100"
               class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-blue-500 transition"
               placeholder="your@email.com"
             />
@@ -404,6 +417,8 @@ import Navigation from '../components/Navigation.astro';
               id="message"
               name="message"
               required
+              minlength="10"
+              maxlength="1000"
               rows="4"
               class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-slate-100 focus:outline-none focus:border-blue-500 transition resize-none"
               placeholder="Tell me about your project..."
@@ -412,7 +427,8 @@ import Navigation from '../components/Navigation.astro';
 
           <button
             type="submit"
-            class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"
+            id="submitBtn"
+            class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Send Message
           </button>
@@ -438,12 +454,22 @@ import Navigation from '../components/Navigation.astro';
     const form = document.getElementById('contactForm') as HTMLFormElement;
     const successMsg = document.getElementById('formSuccess');
     const errorMsg = document.getElementById('formError');
+    const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+
+    // Rate limiting - max 1 submission per 60 seconds
+    let lastSubmissionTime = 0;
+    const RATE_LIMIT_MS = 60000; // 60 sekund
+
+    // Track form open time (bot protection - human needs time to fill form)
+    let formOpenTime = 0;
+    const MIN_FORM_FILL_TIME = 3000; // Minimum 3 sekundy na wypełnienie
 
     function openModal() {
       if (modal) {
         modal.classList.remove('hidden');
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        formOpenTime = Date.now(); // Zapisz czas otwarcia formularza
       }
     }
 
@@ -454,6 +480,7 @@ import Navigation from '../components/Navigation.astro';
         document.body.style.overflow = '';
         successMsg?.classList.add('hidden');
         errorMsg?.classList.add('hidden');
+        formOpenTime = 0;
       }
     }
 
@@ -475,11 +502,43 @@ import Navigation from '../components/Navigation.astro';
       }
     });
 
-    // Form submission with Formspree
+    // Form submission with Formspree + anti-spam protection
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      // Check rate limit
+      const now = Date.now();
+      if (now - lastSubmissionTime < RATE_LIMIT_MS) {
+        if (errorMsg) {
+          errorMsg.textContent = '⏱ Please wait a minute before sending another message.';
+          errorMsg.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // Check if form was filled too quickly (bot detection)
+      const fillTime = now - formOpenTime;
+      if (fillTime < MIN_FORM_FILL_TIME) {
+        if (errorMsg) {
+          errorMsg.textContent = '🤖 Form submitted too quickly. Please take your time.';
+          errorMsg.classList.remove('hidden');
+        }
+        return;
+      }
+
       const formData = new FormData(form);
+
+      // Check honeypot field (bots often fill all fields)
+      if (formData.get('_gotcha')) {
+        console.log('Bot detected via honeypot');
+        return; // Silent fail for bots
+      }
+
+      // Disable submit button during submission
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
 
       // Formspree Form ID
       const FORMSPREE_FORM_ID = 'xojnzvjz';
@@ -495,6 +554,7 @@ import Navigation from '../components/Navigation.astro';
 
         if (response.ok) {
           // Sukces - wiadomość wysłana
+          lastSubmissionTime = now; // Update rate limit timestamp
           successMsg?.classList.remove('hidden');
           errorMsg?.classList.add('hidden');
           form.reset();
@@ -509,9 +569,18 @@ import Navigation from '../components/Navigation.astro';
         }
       } catch (error) {
         // Błąd połączenia lub inny problem
-        errorMsg?.classList.remove('hidden');
+        if (errorMsg) {
+          errorMsg.textContent = '✗ Something went wrong. Please try again or contact me via LinkedIn.';
+          errorMsg.classList.remove('hidden');
+        }
         successMsg?.classList.add('hidden');
         console.error('Form submission error:', error);
+      } finally {
+        // Re-enable submit button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+        }
       }
     });
   </script>
